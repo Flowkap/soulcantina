@@ -255,26 +255,24 @@
   @media (max-width: 560px) { .demo-card { grid-template-columns: 1fr; text-align: center; } .demo-card p { margin-inline: auto; } .play { margin-inline: auto; } }
 
   /* ---------- Galerie ---------- */
+  /* Justified rows: each item grows proportional to its aspect ratio (--r), so rows fill the width without cropping. */
   .gallery {
     margin-top: 2.5rem;
-    display: grid; gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    grid-auto-rows: 200px;
-    grid-auto-flow: dense;
+    display: flex; flex-wrap: wrap; gap: 1rem;
   }
   .gallery button {
+    flex: var(--r) 1 calc(var(--r) * 260px);
+    aspect-ratio: var(--r);
     padding: 0; border: 0; background: var(--bg-3); cursor: zoom-in;
     border-radius: var(--radius); overflow: hidden; position: relative;
   }
-  .gallery button.wide { grid-column: span 2; }
-  .gallery button.tall { grid-row: span 2; }
   .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease, filter .3s ease; }
   .gallery button::after {
     content: ""; position: absolute; inset: 0; background: var(--watercolor); mix-blend-mode: soft-light; opacity: 0; transition: opacity .3s;
   }
   .gallery button:hover img { transform: scale(1.05); }
   .gallery button:hover::after { opacity: .7; }
-  @media (max-width: 560px) { .gallery button.wide { grid-column: auto; } }
+  @media (max-width: 560px) { .gallery button { flex-basis: 100%; } }
 
   .lightbox {
     border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 92vh;
@@ -344,8 +342,8 @@
 
 <header class="hero" id="top">
   <div class="hero-bg">
-    <img src="assets/img/Bandfoto-1-1536x731.jpg"
-         srcset="assets/img/Bandfoto-1-768x365.jpg 768w, assets/img/Bandfoto-1-1536x731.jpg 1536w, assets/img/Bandfoto-1-2048x974.jpg 2048w"
+    <img src="assets/img/altstadtfest-2026-stage-close-1600x900.jpg"
+         srcset="assets/img/altstadtfest-2026-stage-close-768x432.jpg 768w, assets/img/altstadtfest-2026-stage-close-1600x900.jpg 1600w"
          sizes="100vw" alt="" fetchpriority="high">
   </div>
   <div class="wrap">
@@ -380,10 +378,10 @@
           </ul>
         </div>
         <div class="band-photo">
-          <img src="assets/img/A7309629-225-768x1262.jpg"
-               srcset="assets/img/A7309629-225-623x1024.jpg 623w, assets/img/A7309629-225-768x1262.jpg 768w, assets/img/A7309629-225-1040x1709.jpg 1040w"
+          <img src="assets/img/jazzfest-2023-brass-768x1022.jpg"
+               srcset="assets/img/jazzfest-2023-brass-768x1022.jpg 768w, assets/img/jazzfest-2023-brass-1244x1656.jpg 1244w"
                sizes="(max-width: 860px) 90vw, 520px"
-               alt="SOUL CANTINA live auf der Bühne" loading="lazy">
+               alt="Der Brass-Satz von SOUL CANTINA live" loading="lazy">
         </div>
       </div>
 
@@ -419,12 +417,12 @@
         </li>
         <li class="gig" data-date="2026-07-29">
           <div class="gig-date"><span class="day">29</span><span class="month">Jul 2026</span></div>
-          <div><p class="gig-title">Saarburg</p></div>
+          <div><p class="gig-title">Saarburg</p><p class="gig-meta">Konzertsommer</p></div>
           <div class="gig-time">19:00</div>
         </li>
         <li class="gig" data-date="2026-08-22">
           <div class="gig-date"><span class="day">22</span><span class="month">Aug 2026</span></div>
-          <div><p class="gig-title">Kirmes Föhren</p></div>
+          <div><p class="gig-title">Föhren</p><p class="gig-meta">Kirmes</p></div>
           <div class="gig-time">18:00</div>
         </li>
       </ol>
@@ -455,14 +453,13 @@
       <h2>Galerie</h2>
       <div class="stripe"></div>
       <div class="gallery">
-        <button class="wide" data-full="assets/img/Bandfoto-1-2048x974.jpg"><img src="assets/img/Bandfoto-1-1024x487.jpg" alt="SOUL CANTINA live beim Jazzclub Trier" loading="lazy"></button>
-        <button class="tall" data-full="assets/img/A7309629-225-1246x2048.jpg"><img src="assets/img/A7309629-225-623x1024.jpg" alt="SOUL CANTINA live, Foto 2" loading="lazy"></button>
-        <button data-full="assets/img/A7308197-68-2048x1440.jpg"><img src="assets/img/A7308197-68-768x540.jpg" alt="SOUL CANTINA live, Foto 3" loading="lazy"></button>
-        <button data-full="assets/img/A7309149-164-2048x1553.jpg"><img src="assets/img/A7309149-164-768x582.jpg" alt="SOUL CANTINA live, Foto 4" loading="lazy"></button>
-        <button class="wide" data-full="assets/img/A7309350-192-2048x1152.jpg"><img src="assets/img/A7309350-192-1024x576.jpg" alt="SOUL CANTINA live, Foto 5" loading="lazy"></button>
-        <button data-full="assets/img/A7309565-215-2048x1189.jpg"><img src="assets/img/A7309565-215-768x446.jpg" alt="SOUL CANTINA live, Foto 6" loading="lazy"></button>
-        <button data-full="assets/img/A7309965-266-2048x1382.jpg"><img src="assets/img/A7309965-266-768x518.jpg" alt="SOUL CANTINA live, Foto 7" loading="lazy"></button>
-        <button data-full="assets/img/A7309589-217-2048x1416.jpg"><img src="assets/img/A7309589-217-768x531.jpg" alt="SOUL CANTINA live, Foto 8" loading="lazy"></button>
+        <button style="--r:1.778" data-full="assets/img/altstadtfest-2026-stage-close-1600x900.jpg"><img src="assets/img/altstadtfest-2026-stage-close-768x432.jpg" alt="SOUL CANTINA auf der Bühne beim Altstadtfest Trier 2026" loading="lazy"></button>
+        <button style="--r:1.776" data-full="assets/img/altstadtfest-2026-mary-ann-2048x1153.jpg"><img src="assets/img/altstadtfest-2026-mary-ann-768x432.jpg" alt="Sängerin Mary-Ann beim Altstadtfest Trier 2026" loading="lazy"></button>
+        <button style="--r:1.776" data-full="assets/img/altstadtfest-2026-stephan-2048x1153.jpg"><img src="assets/img/altstadtfest-2026-stephan-768x432.jpg" alt="Sänger Stephan beim Altstadtfest Trier 2026" loading="lazy"></button>
+        <button style="--r:0.832" data-full="assets/img/jazzfest-2023-marc-2048x2461.jpg"><img src="assets/img/jazzfest-2023-marc-768x923.jpg" alt="Gitarrist von SOUL CANTINA live, schwarz-weiß" loading="lazy"></button>
+        <button style="--r:1.229" data-full="assets/img/jazzfest-2023-stephan-2048x1667.jpg"><img src="assets/img/jazzfest-2023-stephan-768x625.jpg" alt="Sänger Stephan mit ausgebreiteten Armen, schwarz-weiß" loading="lazy"></button>
+        <button style="--r:1.422" data-full="assets/img/jazzfest-2023-brass-back-2048x1440.jpg"><img src="assets/img/jazzfest-2023-brass-back-768x540.jpg" alt="Der Brass-Satz von hinten auf der Bühne, Blick ins Publikum, schwarz-weiß" loading="lazy"></button>
+        <button style="--r:0.751" data-full="assets/img/jazzfest-2023-brass-1244x1656.jpg"><img src="assets/img/jazzfest-2023-brass-768x1022.jpg" alt="Der Brass-Satz von SOUL CANTINA live" loading="lazy"></button>
       </div>
     </div>
   </section>
