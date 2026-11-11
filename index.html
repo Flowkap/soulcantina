@@ -300,18 +300,53 @@
     background: var(--watercolor); -webkit-background-clip: text; background-clip: text; color: transparent;
   }
 
+  .socials-label {
+    margin: 3rem auto 1rem !important; font-family: var(--font-display); text-transform: uppercase;
+    letter-spacing: .3em; font-size: .8rem;
+  }
+  .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+  .socials a {
+    display: inline-flex; align-items: center; gap: .6rem;
+    padding: .75rem 1.4rem; border-radius: 999px; text-decoration: none; color: var(--text);
+    background: transparent;
+    box-shadow: inset 0 0 0 2px rgba(244, 236, 230, .25);
+    font-family: var(--font-display); text-transform: uppercase; letter-spacing: .14em; font-size: .85rem; font-weight: 700;
+    transition: transform .2s ease, box-shadow .2s ease, color .2s ease;
+  }
+  .socials a:hover, .socials a:focus-visible {
+    background: var(--watercolor); color: #fff; transform: translateY(-2px);
+    box-shadow: 0 14px 34px -10px rgba(207, 91, 141, .9);
+  }
+  .socials svg { width: 22px; height: 22px; flex: none; }
+  .socials-small { gap: .6rem; }
+  .socials-small a { padding: 0; width: 42px; height: 42px; justify-content: center; color: var(--muted); box-shadow: inset 0 0 0 1px rgba(244, 236, 230, .25); }
+
   /* ---------- Footer / Impressum ---------- */
   footer { background: #0e0a10; padding: 3rem 0 2.5rem; font-size: .9rem; color: var(--muted); }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; }
-  footer img { height: 34px; width: auto; opacity: .85; }
   footer a { color: var(--muted); }
-  .legal { padding: 0 0 3rem; background: #0e0a10; color: var(--muted); font-size: .9rem; }
-  .legal details { border-top: 1px solid rgba(255, 255, 255, .08); padding-top: 1.5rem; }
-  .legal summary {
-    cursor: pointer; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .2em; color: var(--text);
+  .legal-modal {
+    width: min(760px, 100% - 2rem); max-height: 86vh; padding: 0; overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--radius);
+    background: var(--bg-2); color: var(--muted); font-size: .92rem;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .8);
   }
-  .legal h3 { margin-top: 2rem; font-size: .95rem; color: var(--text); }
-  .legal p { max-width: 80ch; }
+  .legal-modal::backdrop { background: rgba(10, 7, 12, .85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .legal-head {
+    position: sticky; top: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 1.25rem 1.5rem; background: var(--bg-2); border-bottom: 1px solid rgba(255, 255, 255, .08);
+  }
+  .legal-head::after { content: ""; position: absolute; inset: auto 0 -1px 0; height: 2px; background: var(--watercolor); }
+  .legal-head h2 { margin: 0; font-size: 1.3rem; color: var(--text); }
+  .legal-close {
+    flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255, 255, 255, .1); color: var(--text); font-size: 1.5rem; line-height: 1;
+  }
+  .legal-close:hover { background: rgba(255, 255, 255, .2); }
+  .legal-body { padding: .5rem 1.5rem 2rem; }
+  .legal-body h3 { margin-top: 1.75rem; font-size: .95rem; color: var(--text); }
+  .legal-body p { margin: 0 0 1rem; }
 
   @media (max-width: 860px) {
     .band-grid { grid-template-columns: 1fr; }
@@ -472,43 +507,52 @@
       <p>Stadtfest, Kirmes, Club oder private Feier – schreibt uns, wir melden uns.</p>
       <a class="contact-mail" href="mailto:booking@soulcantina.de">booking@soulcantina.de</a>
       <div><a class="btn btn-primary" href="mailto:booking@soulcantina.de">Jetzt anfragen</a></div>
+      <p class="socials-label">Folgt uns</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/soulcantina.band/" target="_blank" rel="noopener" aria-label="SOUL CANTINA auf Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+        <a href="https://www.youtube.com/playlist?list=PLcHAwiSiMnx9wvCCqQ1sd_KNvI9vhTItv" target="_blank" rel="noopener" aria-label="SOUL CANTINA auf YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.7 3.1z"/></svg><span>YouTube</span></a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <img src="assets/img/logo_trans.png" alt="SOUL CANTINA" width="68" height="34">
+    <div class="socials socials-small">
+      <a href="https://www.instagram.com/soulcantina.band/" target="_blank" rel="noopener" aria-label="SOUL CANTINA auf Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.youtube.com/playlist?list=PLcHAwiSiMnx9wvCCqQ1sd_KNvI9vhTItv" target="_blank" rel="noopener" aria-label="SOUL CANTINA auf YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.7 3.1z"/></svg></a>
+    </div>
     <span>© <span id="year">2026</span> SOUL CANTINA · <a href="#impressum">Impressum &amp; Datenschutz</a></span>
   </div>
 </footer>
 
-<div class="legal" id="impressum">
-  <div class="wrap">
-    <details>
-      <summary>Impressum &amp; Datenschutz</summary>
-      <h3>Impressum</h3>
-      <p>Angaben gemäß § 5 TMG<br>
-      Florian Kappes<br>
-      Töpferstraße 5<br>
-      54313 Rheinland-Pfalz – Zemmer</p>
-
-      <h3>Haftung für Inhalte</h3>
-      <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
-
-      <h3>Haftung für Links</h3>
-      <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-
-      <h3>Urheberrecht</h3>
-      <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
-
-      <h3>Datenschutz</h3>
-      <p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
-      <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
-      <p>Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.</p>
-    </details>
+<dialog class="legal-modal" id="impressum" aria-labelledby="impressum-title">
+  <div class="legal-head">
+    <h2 id="impressum-title">Impressum &amp; Datenschutz</h2>
+    <button class="legal-close" aria-label="Schließen">×</button>
   </div>
-</div>
+  <div class="legal-body">
+    <h3>Impressum</h3>
+    <p>Angaben gemäß § 5 TMG<br>
+    Florian Kappes<br>
+    Töpferstraße 5<br>
+    54313 Rheinland-Pfalz – Zemmer</p>
+
+    <h3>Haftung für Inhalte</h3>
+    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+
+    <h3>Haftung für Links</h3>
+    <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+
+    <h3>Urheberrecht</h3>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+
+    <h3>Datenschutz</h3>
+    <p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
+    <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+    <p>Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.</p>
+  </div>
+</dialog>
 
 <dialog class="lightbox" aria-label="Foto vergrößert">
   <button class="lightbox-close" aria-label="Schließen">×</button>
@@ -552,6 +596,22 @@
   }));
   dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+
+  const legal = document.getElementById('impressum');
+  const openLegal = () => { if (!legal.open) legal.showModal(); };
+  const syncLegal = () => { if (location.hash === '#impressum') openLegal(); };
+  document.querySelectorAll('a[href="#impressum"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    history.replaceState(null, '', '#impressum');
+    openLegal();
+  }));
+  legal.querySelector('.legal-close').addEventListener('click', () => legal.close());
+  legal.addEventListener('click', e => { if (e.target === legal) legal.close(); });
+  legal.addEventListener('close', () => {
+    if (location.hash === '#impressum') history.replaceState(null, '', location.pathname + location.search);
+  });
+  window.addEventListener('hashchange', syncLegal);
+  syncLegal();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
